@@ -1,6 +1,14 @@
-# 🏎️ The Living Lot
+# Temporal Night Drive
 
-### A Temporal demo where every car is a program that lives as long as the car does
+### A neon-lit Temporal demo where every car on the lot is a program that lives as long as the car does
+
+<p align="center">
+  <img src="public/screen.webp" alt="Temporal Night Drive — a synthwave CRT dashboard showing a grid of live vehicle workflows with an inspector panel and a lifeline log" width="900" />
+</p>
+
+<p align="center">
+  <em>Lot dashboard → <code>localhost:3000</code> &nbsp;•&nbsp; Temporal Web UI → <code>localhost:8233</code></em>
+</p>
 
 Each vehicle on the dealership lot is a single **Temporal Workflow** — started the
 moment the car is built and still running years later through every test drive,
@@ -13,13 +21,9 @@ scrapped.
 > memory durably, answers messages for years, and ends only when the car does.
 > There is no separate "save the leftovers" step, because the program never leaves.
 
-<p align="center">
-  <em>Lot dashboard → <code>localhost:3000</code> &nbsp;•&nbsp; Temporal Web UI → <code>localhost:8233</code></em>
-</p>
-
 ---
 
-## ✨ What it demonstrates
+## What it demonstrates
 
 | Concept | How it shows up |
 | --- | --- |
@@ -33,7 +37,7 @@ scrapped.
 
 ---
 
-## 🧭 Architecture
+## Architecture
 
 ```mermaid
 flowchart LR
@@ -52,14 +56,14 @@ parts you're free to change.
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 - **Node.js 20+** (developed on Node 22)
 - **Docker** (runs the single‑container Temporal dev server, which bundles the Web UI)
 
 ---
 
-## 🚀 Quick start
+## Quick start
 
 Clone, install, and copy the environment defaults:
 
@@ -101,7 +105,7 @@ npm run seed
 
 ---
 
-## 🎮 Using the dashboard
+## Using the dashboard
 
 The dashboard is a **window into a population of running entities** — the grid
 isn't `SELECT * FROM cars`, it's a Visibility query over live Workflows.
@@ -115,14 +119,14 @@ isn't `SELECT * FROM cars`, it's a Visibility query over live Workflows.
 5. Flip the **Chaos** panel to break the mail service and watch `sendRecallNotice`
    retry, then heal.
 
-> 💡 **The sale is the "oh" moment.** Try selling a car that isn't on the lot, or
+> **The sale is the "oh" moment.** Try selling a car that isn't on the lot, or
 > one under recall — the entity rejects it at the door with the *real* reason
 > (e.g. *"Cannot sell a vehicle under open recall"*), because the Update's
 > validator is the consistency boundary.
 
 ---
 
-## ⏱️ Time compression
+## Time compression
 
 Temporal sleeps are real wall‑clock by default. So the demo can show *years* in
 seconds, every durable sleep is written as `realDuration / DEMO_TIME_SCALE`. The
@@ -131,7 +135,7 @@ entity is genuinely running on a real timer; only the wall‑clock span changed.
 
 ---
 
-## 🛠️ Scripts
+## Scripts
 
 | Command | What it does |
 | --- | --- |
@@ -146,7 +150,7 @@ entity is genuinely running on a real timer; only the wall‑clock span changed.
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 All optional — sensible defaults live in `.env.example`.
 
@@ -159,7 +163,7 @@ All optional — sensible defaults live in `.env.example`.
 
 ---
 
-## 📂 Project structure
+## Project structure
 
 ```
 src/
@@ -184,7 +188,7 @@ scripts/                 # seed + replay/unit tests
 
 ---
 
-## 🔌 HTTP API
+## HTTP API
 
 The dashboard talks to Temporal only through these server‑side routes (the browser
 never holds a Temporal connection):
@@ -203,7 +207,7 @@ never holds a Temporal connection):
 
 ---
 
-## 🩺 Troubleshooting
+## Troubleshooting
 
 - **Manufacturing seems to do nothing / the lot stays empty.** The Worker registers
   the custom Search Attributes on startup; make sure `npm run worker` is running and
@@ -216,6 +220,6 @@ never holds a Temporal connection):
 
 ---
 
-## 📄 License
+## License
 
 Released under the **MIT License**. See [`LICENSE`](./LICENSE) for the full text.
