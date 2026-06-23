@@ -1,0 +1,40 @@
+# The Living Lot — local Temporal stack.
+# Single-container dev server (in-memory SQLite) with the bundled Web UI.
+# - gRPC frontend:  localhost:7233  (the Worker + Next.js client connect here)
+# - Web UI:         http://localhost:8233
+services:
+  temporal:
+    container_name: living-lot-temporal
+    image: temporalio/temporal:latest
+    command:
+      - server
+      - start-dev
+      - --ip
+      - 0.0.0.0
+      - --ui-port
+      - "8233"
+      - --log-level
+      - warn
+      # The lot dashboard is a Visibility query over these search attributes.
+      - --search-attribute
+      - Make=Keyword
+      - --search-attribute
+      - Model=Keyword
+      - --search-attribute
+      - VehicleYear=Int
+      - --search-attribute
+      - Status=Keyword
+      - --search-attribute
+      - LotLocation=Keyword
+      - --search-attribute
+      - CurrentOwner=Keyword
+      - --search-attribute
+      - ListedAt=Datetime
+    ports:
+      - "7233:7233"
+      - "8233:8233"
+    healthcheck:
+      test: ["CMD", "temporal", "operator", "namespace", "list", "--address", "127.0.0.1:7233"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
